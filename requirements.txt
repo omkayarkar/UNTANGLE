@@ -1,0 +1,10 @@
+streamlit
+PyMuPDF
+pandas
+openpyxl
+opencv-python-headless
+Pillow
+networkx
+matplotlib
+pytesseract
+pytest
