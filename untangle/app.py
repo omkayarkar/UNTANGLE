@@ -319,7 +319,10 @@ else:
     )
     supported_edges = len(process.connections)
     exports = render_exports(document, report_rows, process, "UNTANGLE · Simplified P&ID")
-    connection_rows = connection_validation_rows(process)
+    connection_rows = [
+        {**row, "page": str(row["page"])}
+        for row in connection_validation_rows(process)
+    ]
     tab_overview, tab_diagram, tab_equipment, tab_connections, tab_tags, tab_downloads, tab_method = st.tabs(
         [
             "Project overview",
