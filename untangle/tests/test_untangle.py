@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import shutil
+from pathlib import Path
 
 import networkx as nx
 import pandas as pd
@@ -126,6 +127,36 @@ def test_invalid_and_empty_inputs_are_rejected():
         excel_sheet_names(b"")
     with pytest.raises(IngestionError, match="Could not read"):
         excel_sheet_names(b"not an Excel workbook")
+
+
+def test_streamlit_synthetic_review_and_export_flow():
+    from streamlit.testing.v1 import AppTest
+
+    app_path = Path(__file__).resolve().parents[1] / "app.py"
+    app = AppTest.from_file(str(app_path)).run(timeout=30)
+    assert not app.exception
+
+    app.radio[1].set_value("Synthetic demonstration").run(timeout=30)
+    assert not app.exception
+    app.button[0].click().run(timeout=60)
+    assert not app.exception
+    assert any(item.value == "Analysis overview" for item in app.subheader)
+
+    navigation = [
+        "Reports & exports",
+        "Process diagram",
+        "Validation center",
+        "Source evidence",
+        "Methodology",
+    ]
+    for section in navigation:
+        app.radio[1].set_value(section).run(timeout=30)
+        assert not app.exception
+        if section == "Reports & exports":
+            download_labels = [button.label for button in app.get("download_button")]
+            assert "Diagram · PDF" in download_labels
+            assert "Tag report · Excel" in download_labels
+            assert "Source code + tests · ZIP" in download_labels
 
 
 @pytest.mark.skipif(not shutil.which("tesseract"), reason="Tesseract executable is not installed")
