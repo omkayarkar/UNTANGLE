@@ -16,3 +16,6 @@ python -m pytest -q untangle/tests
 
 Dependencies are listed in the root `requirements.txt`. OCR additionally uses
 the Tesseract executable; text and vector PDF analysis do not require OCR.
+
+Install the listed Python dependencies before starting the workflow in a fresh
+environment. The “Start application” workflow uses the run command above.

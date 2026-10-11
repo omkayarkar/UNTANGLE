@@ -1,0 +1,191 @@
+# UNTANGLE — Premium Industrial Engineering Workbench Upgrade
+
+You are upgrading an EXISTING project called UNTANGLE for the VIT Code_Apex 3.0 hackathon, Emerson track.
+
+Your objective is to transform the current basic Streamlit application into a polished, professional industrial engineering software product with a powerful user interface and reliable underlying functionality.
+
+**This is an existing application. Do not create a new project or rebuild it from scratch.**
+
+## 1. First inspect the project
+
+Inspect the existing code and understand its architecture before editing:
+
+- `untangle/app.py`
+- `untangle/ingest.py`
+- `untangle/untangle_core.py`
+- `untangle/graph_model.py`
+- `untangle/diagram.py`
+- `untangle/synthetic.py`
+- `untangle/tests/`
+- `untangle/methodology.md`
+- `requirements.txt`
+
+The existing application uses Python, Streamlit, PyMuPDF, Pandas, OpenPyXL, NetworkX, Matplotlib, and optional OCR.
+
+Preserve the existing architecture and working analysis pipeline. Do not migrate to React, Node.js, or another framework. Do not replace real processing with mock data.
+
+## 2. Design a professional engineering workspace
+
+The current interface looks like a simple project introduction. Replace that experience with a functional engineering workbench.
+
+### Visual direction
+- Premium industrial engineering software aesthetic.
+- Deep navy or charcoal navigation, white or neutral content surfaces, restrained teal accents.
+- Professional typography, compact spacing, clear hierarchy, aligned panels, and consistent status indicators.
+- Avoid oversized headings, generic marketing layouts, unnecessary decorative cards, and excessive empty space.
+- Make the application look like a real technical desktop application rather than a beginner Streamlit demo.
+
+### Main application layout
+Create a persistent sidebar or navigation area with:
+
+1. Project Workspace
+2. Process Diagram
+3. Validation Center
+4. Source Evidence
+5. Reports & Exports
+6. Methodology
+
+Show the project name, current analysis status, and relevant navigation consistently.
+
+## 3. Build a real project workspace
+
+The initial screen must immediately expose the two required inputs.
+
+### Input panel
+Provide two real, working upload controls side by side:
+
+**P&ID Drawing**
+- PDF uploader.
+- Selected filename and file validation.
+- PDF preview.
+- Ability to replace the file.
+
+**Instrumentation I/O List**
+- Excel uploader.
+- Worksheet selection.
+- Explicit tag-column selection.
+- Spreadsheet preview.
+- Ability to replace the file.
+
+Add a clear primary action: **Analyze Documents**.
+
+Disable analysis when required inputs are invalid. Show useful validation messages instead of generic errors.
+
+Keep the existing synthetic demonstration, but label it clearly as synthetic.
+
+Remember uploaded files and analysis results appropriately using Streamlit session state. When an input or relevant mapping changes, invalidate stale results instead of displaying an outdated analysis.
+
+## 4. Create a process diagram studio
+
+Make the generated process diagram the main visual centerpiece after analysis.
+
+- Use the available workspace effectively.
+- Support fit-to-view, zoom, and pan where practical.
+- Display readable equipment and instrument labels.
+- Use clean spacing and a logical left-to-right layout.
+- Show flow direction only when supported by evidence.
+- Preserve identified duty/standby pumps as parallel branches.
+- Distinguish supported connections, ambiguous junctions, and unresolved connections visually.
+- Avoid label collisions and unnecessary line crossings.
+- Include a legend explaining all status indicators.
+
+The diagram must come from the current uploaded documents and existing graph pipeline. Never display a fixed demonstration diagram as if it were generated from the user's documents.
+
+Do not fabricate connectivity to make the diagram look complete.
+
+## 5. Create an engineering validation center
+
+Display actionable issues in a professional table or review panel.
+
+Include applicable statuses:
+- Found.
+- Missing from P&ID.
+- Duplicate in I/O list.
+- Ambiguous PDF detections.
+- Invalid input tag.
+- Unresolved equipment connection.
+- Uncertain junction.
+- Extraction warning.
+
+Make summary counts consistent with the detailed records.
+
+Where possible, provide source page references, extracted text, associated equipment, or other supporting evidence.
+
+A tag match alone must not imply that the associated pipe connection is verified.
+
+Make it easy to filter issues by status and severity.
+
+## 6. Add a source evidence inspector
+
+Allow users to inspect the original documents alongside extracted results.
+
+- Render PDF pages with PyMuPDF.
+- Show workbook rows from the selected worksheet.
+- Highlight the selected tag column.
+- Show extraction warnings and detected tag information.
+- Preserve page references and other evidence when available.
+
+Keep source evidence distinct from inferred information. If extraction fails, explain why.
+
+## 7. Improve the report and export experience
+
+Provide a dedicated Reports & Exports section.
+
+Include available outputs such as:
+- Simplified process diagram.
+- Instrument-tag verification report.
+- Unresolved issues and warnings.
+- Methodology and limitations.
+
+Preserve existing export implementations. Verify that exported files contain the current analysis and open successfully.
+
+Do not expose an export control for a format that is not implemented or fails to generate.
+
+## 8. Fix correctness problems before polishing
+
+Investigate these known concerns from earlier runs:
+
+- Tag-match totals changed when the Excel column selection changed.
+- Ambiguous PDF detections and duplicate tags need consistent reporting.
+- Some equipment connections and endpoint-to-line junctions remain unresolved.
+- The methodology path was previously incorrect.
+- Streamlit session state and stale results must be handled correctly.
+
+Do not simply hide warnings or alter summary counts to make the dashboard look successful.
+
+Do not weaken tests to force them to pass.
+
+## 9. Credit-efficient execution
+
+My remaining Replit Agent credits are limited.
+
+- Do not perform an exhaustive rewrite.
+- Do not create a new application.
+- Do not repeatedly reread unchanged files.
+- Do not install unnecessary dependencies.
+- Do not use paid AI APIs.
+- Do not create extra documentation unless needed.
+- Make the highest-impact changes in the smallest reasonable patch.
+- Prioritize the workspace UI, tag correctness, diagram review, and existing exports.
+- Run the existing tests once after the modifications and fix any regression caused by your changes.
+
+If the full scope cannot be completed in one run, prioritize a coherent, working vertical slice instead of generating incomplete features everywhere.
+
+## 10. Acceptance criteria
+
+The upgrade is successful when:
+
+1. The first screen immediately presents the PDF and Excel upload controls.
+2. The interface looks like professional industrial engineering software.
+3. Both upload controls connect to the actual analysis pipeline.
+4. Worksheet and tag-column selection work correctly.
+5. Tag counts and detailed results agree.
+6. The diagram is based on extracted evidence.
+7. Uncertain connections remain visibly unresolved.
+8. Source previews and available exports work.
+9. Existing tests continue to pass, with skipped tests reported honestly.
+10. The application remains runnable in the existing Replit environment.
+
+After making changes, provide a concise report of the files changed, features completed, test results, and any remaining limitations.
+
+Start implementing the most important changes now. Do not stop after providing a plan.
