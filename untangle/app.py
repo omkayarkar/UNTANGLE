@@ -54,26 +54,137 @@ st.set_page_config(
 st.markdown(
     """
     <style>
-    :root { --ink:#10243a; --teal:#087f8c; --wash:#eef5f5; --line:#d9e3e8; }
-    .stApp { background: #f6f9fa; color: var(--ink); }
-    [data-testid="stHeader"] { background: rgba(246,249,250,.92); }
-    [data-testid="stSidebar"] { background: #10243a; border-right:1px solid #233c52; }
-    [data-testid="stSidebar"] * { color: #f4f8f9; }
-    [data-testid="stSidebar"] [data-baseweb="select"] * { color:#10243a; }
-    .ut-kicker { color:#087f8c; letter-spacing:.14em; font-size:.68rem; font-weight:750; }
-    .ut-title { color:#10243a; font-weight:760; letter-spacing:-.025em; font-size:1.8rem; line-height:1.1; margin:.18rem 0 .28rem; }
-    .ut-sub { color:#536579; max-width:900px; font-size:.92rem; line-height:1.45; }
-    .ut-note { border-left:3px solid #087f8c; background:#edf4f5; padding:.7rem .9rem; border-radius:0 .45rem .45rem 0; color:#263c4c; }
-    .ut-status { font-size:.76rem; font-weight:700; color:#087f8c; background:#e6f3f2; border:1px solid #c7e3df; border-radius:999px; padding:.36rem .7rem; display:inline-block; }
-    div[data-testid="stMetric"] { background:white; border:1px solid #d9e3e8; border-radius:8px; padding:11px 14px; }
-    div[data-testid="stMetricLabel"] { color:#536579; }
-    div[data-testid="stMetricValue"] { color:#10243a; }
-    div.stButton > button[kind="primary"] { background:#087f8c; border-color:#087f8c; }
-    div.stButton > button[kind="primary"]:disabled { background:#668f94; border-color:#668f94; color:#f4f8f9; opacity:1; }
-    [data-testid="stDataFrame"] { border:1px solid #d9e3e8; border-radius:8px; }
-    [data-testid="stExpander"] { border-color:#d9e3e8; border-radius:8px; }
-    .block-container { padding-top:1.6rem; padding-bottom:2rem; }
-    </style>
+:root {
+    --ut-bg: #F4F8F7;
+    --ut-surface: #FFFFFF;
+    --ut-text: #173B40;
+    --ut-muted: #526A6D;
+    --ut-accent: #176D68;
+    --ut-border: #DCE7E4;
+    --ut-note: #EAF3F1;
+    --ut-note-text: #294D4D;
+}
+
+
+.stApp, [data-testid="stAppViewContainer"] {
+    background: var(--ut-bg);
+    color: var(--ut-text);
+}
+
+[data-testid="stHeader"] {
+    background: var(--ut-bg);
+}
+
+[data-testid="stSidebar"] {
+    background: var(--ut-surface);
+    border-right: 1px solid var(--ut-border);
+}
+
+[data-testid="stSidebar"] * {
+    color: var(--ut-text);
+}
+
+[data-testid="stSidebar"] [data-baseweb="select"] * {
+    color: var(--ut-text);
+}
+
+.ut-kicker {
+    color: var(--ut-accent);
+    letter-spacing: .14em;
+    font-size: .68rem;
+    font-weight: 750;
+}
+
+.ut-title {
+    color: var(--ut-text);
+    font-weight: 760;
+    letter-spacing: -.025em;
+    font-size: 1.8rem;
+    line-height: 1.1;
+    margin: .18rem 0 .28rem;
+}
+
+.ut-sub {
+    color: var(--ut-muted);
+    max-width: 900px;
+    font-size: .92rem;
+    line-height: 1.5;
+}
+
+.ut-note {
+    border-left: 3px solid var(--ut-accent);
+    background: var(--ut-note);
+    padding: .8rem 1rem;
+    border-radius: 0 .5rem .5rem 0;
+    color: var(--ut-note-text);
+}
+
+.ut-status {
+    font-size: .76rem;
+    font-weight: 700;
+    color: var(--ut-accent);
+    background: var(--ut-note);
+    border: 1px solid var(--ut-border);
+    border-radius: 999px;
+    padding: .36rem .7rem;
+    display: inline-block;
+}
+
+div[data-testid="stMetric"] {
+    background: var(--ut-surface);
+    color: var(--ut-text);
+    border: 1px solid var(--ut-border);
+    border-radius: 12px;
+    padding: 13px 15px;
+}
+
+div[data-testid="stMetricLabel"],
+div[data-testid="stMetricValue"] {
+    color: var(--ut-text);
+}
+
+[data-testid="stExpander"] {
+    background: var(--ut-surface);
+    border: 1px solid var(--ut-border);
+    border-radius: 10px;
+}
+
+[data-testid="stFileUploader"] {
+    background: var(--ut-surface);
+    border: 1px solid var(--ut-border);
+    border-radius: 10px;
+    padding: 8px;
+}
+
+[data-testid="stFileUploader"] section {
+    background: transparent;
+}
+
+[data-testid="stDataFrame"],
+[data-testid="stTable"] {
+    border: 1px solid var(--ut-border);
+    border-radius: 10px;
+}
+
+div.stButton > button[kind="primary"] {
+    background: var(--ut-accent);
+    border: 1px solid var(--ut-accent);
+    color: #FFFFFF;
+    border-radius: 9px;
+    font-weight: 650;
+}
+
+
+div.stButton > button:focus-visible {
+    outline: 2px solid var(--ut-accent);
+    outline-offset: 2px;
+}
+
+.block-container {
+    padding-top: 1.8rem;
+    padding-bottom: 2.5rem;
+}
+</style>
     """,
     unsafe_allow_html=True,
 )
