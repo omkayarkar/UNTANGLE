@@ -8,6 +8,7 @@ import pandas as pd
 import pymupdf as fitz
 import pytest
 
+from untangle.untangle_core import DocumentAnalysis, Equipment
 from untangle.diagram import render_exports
 from untangle.graph_model import (
     _find_line_intersections,
@@ -165,3 +166,26 @@ def test_raster_fixture_can_supply_ocr_candidates(synthetic):
     document = inspect_pdf(raster_pdf, "raster.pdf", use_ocr=True)
     assert document.page_count == 1
     assert any(tag.source == "OCR" for tag in document.tags)
+
+def test_graph_does_not_create_all_to_all_edges_for_three_node_component():
+    document = DocumentAnalysis(
+        file_name="three_nodes.pdf",
+        page_count=1,
+        equipment=[
+            Equipment("P101", "P101", "Pump", 1, (0, 0, 10, 10),
+                     "test", "label-confirmed"),
+            Equipment("V101", "V101", "Valve", 1, (45, 0, 55, 10),
+                     "test", "label-confirmed"),
+            Equipment("T101", "T101", "Tank", 1, (90, 0, 100, 10),
+                     "test", "label-confirmed"),
+        ],
+        segments=[
+            LineSegment(1, 10, 5, 45, 5, 1),
+            LineSegment(1, 55, 5, 90, 5, 1),
+        ],
+    )
+
+    graph = build_process_graph([], document)
+
+    assert graph.graph.number_of_nodes() == 3
+    assert graph.graph.number_of_edges() == 2
