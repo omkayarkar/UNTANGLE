@@ -137,10 +137,44 @@ def render_exports(
     fig.patch.set_facecolor("#FFFFFF")
     ax.set_facecolor("#FFFFFF")
 
+# Draw supported connections as orthogonal pipe routes.
+# Keep connections behind equipment and instrument nodes.
     for first, second, data in graph.edges(data=True):
         x1, y1 = positions[first]
         x2, y2 = positions[second]
-        ax.plot([x1, x2], [y1, y2], color=LINE, linewidth=1.65, zorder=1)
+
+    # Route horizontally first, then vertically.
+        mid_x = (x1 + x2) / 2
+
+        ax.plot(
+            [x1, mid_x, mid_x, x2],
+            [y1, y1, y2, y2],
+            color=LINE,
+            linewidth=1.8,
+            solid_capstyle="round",
+            zorder=1,
+        )
+    # Small terminal markers make connection endpoints easier to see.
+        ax.add_patch(
+            Circle(
+                (x1, y1),
+                0.045,
+                facecolor=LINE,
+                edgecolor=LINE,
+                linewidth=0.5,
+                zorder=2,
+            )
+        )
+        ax.add_patch(
+            Circle(
+                (x2, y2),
+                0.045,
+                facecolor=LINE,
+                edgecolor=LINE,
+                linewidth=0.5,
+                zorder=2,
+            )
+        )
 
     for node, data in graph.nodes(data=True):
         x, y = positions[node]
@@ -158,9 +192,9 @@ def render_exports(
 
         if kind == "equipment":
             patch = FancyBboxPatch(
-                (x - 0.64, y - 0.28),
-                1.28,
-                0.56,
+                (x - 0.78, y - 0.34),
+                1.56,
+                0.68,
                 boxstyle="round,pad=0.06,rounding_size=0.12",
                 facecolor="#FFFFFF" if not unresolved else "#FFF8F6",
                 edgecolor=color,
